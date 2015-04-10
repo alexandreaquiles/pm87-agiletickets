@@ -7,6 +7,12 @@ Funcionalidade: Cadastro de Estacionamento
 
   Cenário:
     Dado que o usuário abre a lista de estabelecimentos
-    Quando o usuário preenche o formulário e marca que há estacionamento
-    E clica em Adicionar
+    Quando o usuário marca que há estacionamento
+    E clica em "Adicionar"
     Então a última linha da lista mostra que há estacionamento
+    
+  Cenário:
+    Dado que o usuário abre a lista de estabelecimentos
+    Quando o usuário marca que não há estacionamento
+    E clica em "Adicionar"
+    Então a última linha da lista mostra que não há estacionamento    

@@ -7,7 +7,7 @@ import br.com.caelum.agiletickets.acceptance.page.EstabelecimentosPage;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.pt.Dado;
-import cucumber.api.java.pt.Entao;
+import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
 
 public class EstacionamentoSteps {
@@ -33,19 +33,19 @@ public class EstacionamentoSteps {
 		estabelecimentos.abreListagem();
 	}
 	
-	@Quando("o usuário preenche o formulário e marca que há estacionamento")
-	public void adicioneEstabelecimento() {
-		estabelecimentos.adicioneEstabelecimento("Caelum", "R. Vergueiro, 3185");
+	@Quando("o usuário marca que (há|não há) estacionamento")
+	public void marcaEstacionamento(String temEstacionamento){
+		estabelecimentos.adicioneEstabelecimentoComEstacionamento("há".equals(temEstacionamento)?true:false);
 	}
 	
-	@Quando("clica em Adicionar")
+	@Quando("clica em \"Adicionar\"")
 	public void clicaAdicionar(){
 		estabelecimentos.adicionar();
 	}
 
-	@Entao("a última linha da lista mostra que há estacionamento")
-	public void ultimaLinhaDeveTerEstacionamento() {
-		estabelecimentos.ultimaLinhaDeveConter("Caelum", "R. Vergueiro, 3185");
+	@Então("a última linha da lista mostra que (há|não há) estacionamento")
+	public void ultimaLinhaDeveTerEstacionamento(String temEstacionamento) {
+		estabelecimentos.ultimaLinhaDeveTerEstacionamento("há".equals(temEstacionamento)?true:false);
 	}
 
 }

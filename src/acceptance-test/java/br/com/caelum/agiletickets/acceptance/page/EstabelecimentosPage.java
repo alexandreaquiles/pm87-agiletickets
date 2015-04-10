@@ -10,23 +10,31 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import br.com.caelum.agiletickets.acceptance.SharedDriver;
+
 public class EstabelecimentosPage {
 
 	private static final String BASE_URL = "http://localhost:8080";
 	private final WebDriver driver;
 	private WebElement form;
 
-	public EstabelecimentosPage(WebDriver driver) {
-		this.driver = driver;
+	public EstabelecimentosPage(SharedDriver webDriver) {
+		this.driver = webDriver;
 	}
 
 	public void abreListagem() {
 		driver.get(BASE_URL + "/estabelecimentos");
 	}
 
-	public void adicioneEstabelecimento(String nome, String endereco) {
+	public void adicioneEstabelecimento() {
 		form = form();
+	}
+
+	public void comNome(String nome){
 		form.findElement(By.name("estabelecimento.nome")).sendKeys(nome);
+	}
+
+	public void comEndereco(String endereco){
 		form.findElement(By.name("estabelecimento.endereco")).sendKeys(endereco);
 	}
 
@@ -48,9 +56,11 @@ public class EstabelecimentosPage {
 	}
 
 	public void adicioneEstabelecimentoComEstacionamento(boolean temEstacionamento) {
-		form().findElement(By.name("estabelecimento.temEstacionamento"))
+		adicioneEstabelecimento();
+		comNome("qualquer");
+		comEndereco("qualquer");
+		form.findElement(By.name("estabelecimento.temEstacionamento"))
 			.sendKeys(temEstacionamento ? "Sim" : "Não");
-		adicioneEstabelecimento("qualquer", "qualquer");
 	}
 
 	public void ultimaLinhaDeveTerEstacionamento(boolean estacionamento) {

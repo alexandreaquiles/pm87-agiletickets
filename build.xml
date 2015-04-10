@@ -13,6 +13,12 @@
 		<pathelement location="${test.build.dir}" />
 		<pathelement location="${build.dir}" />
 	</path>
+	<path id="acceptance-test.path.id">
+		<fileset dir="lib/acceptance-test" />
+		<path refid="test.path.id" />
+		<pathelement location="${acceptance-test.build.dir}" />
+		<pathelement location="${build.dir}" />
+	</path>
 
 	<!-- ================================= 
           target: resolve              
@@ -125,6 +131,62 @@
 	<target name="report" depends="resolve" description="--> generates a report of dependencies">
 		<mkdir dir="${output.dir}/reports" />
 		<ivy:report todir="${output.dir}/reports" />
+	</target>
+
+	<!-- ================================= 
+	      target: compile test
+	     ================================= -->
+	<target name="compile-acceptance-test" depends="compile-test" description="--> compile acceptance test">
+		<mkdir dir="${acceptance-test.build.dir}" />
+		<delete dir="${acceptance-test.build.dir}" includes="**/*.*" />
+		<javac srcdir="${acceptance-test.src.dir}" destdir="${acceptance-test.build.dir}" classpathref="acceptance-test.path.id" debug="on" />
+		<copy todir="${acceptance-test.build.dir}">
+			<fileset dir="${acceptance-test.resources.dir}">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+	</target>
+
+
+	<target name="preenche-banco" depends="compile" description="--> preenche banco de dados">
+		<java classname="br.com.caelum.agiletickets.PreencheBanco" failonerror="true">
+			<classpath>
+				<pathelement location="${build.dir}"/>
+				<path refid="lib.path.id"/>
+			</classpath>
+		</java>
+	</target>
+	
+	<!-- ================================= 
+          target: runcukes              
+         ================================= -->
+	<target name="runcukes" depends="compile-acceptance-test, preenche-banco" description="--> runs cucumber tests">
+		<mkdir dir="${output.dir}/cucumber-junit-report"/>
+		<java classname="cucumber.api.cli.Main" fork="true" failonerror="false" resultproperty="cucumber.exitstatus">
+			<classpath refid="acceptance-test.path.id"/>
+			<arg value="--plugin"/>
+			<arg value="pretty"/>
+			<arg value="--plugin"/>
+			<arg value="junit:${output.dir}/cucumber-junit-report.xml"/>
+			<arg value="--glue"/>
+			<arg value="br.com.caelum.agiletickets.acceptance"/>
+			<arg value="src/acceptance-test/resources"/>
+		</java>
+
+		<junitreport todir="${output.dir}/cucumber-junit-report">
+		<fileset dir="${output.dir}">
+			<include name="cucumber-junit-report.xml"/>
+		</fileset>
+		<report format="frames" todir="${output.dir}/cucumber-junit-report"/>
+		</junitreport>
+
+		<fail message="Cucumber falhou... :(">
+			<condition>
+				<not>
+					<equals arg1="${cucumber.exitstatus}" arg2="0"/>
+				</not>
+			</condition>
+		</fail>
 	</target>
 
 </project>

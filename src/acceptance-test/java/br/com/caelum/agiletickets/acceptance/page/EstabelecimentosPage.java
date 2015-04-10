@@ -14,6 +14,7 @@ public class EstabelecimentosPage {
 
 	private static final String BASE_URL = "http://localhost:8080";
 	private final WebDriver driver;
+	private WebElement form;
 
 	public EstabelecimentosPage(WebDriver driver) {
 		this.driver = driver;
@@ -24,12 +25,16 @@ public class EstabelecimentosPage {
 	}
 
 	public void adicioneEstabelecimento(String nome, String endereco) {
-		WebElement form = form();
+		form = form();
 		form.findElement(By.name("estabelecimento.nome")).sendKeys(nome);
 		form.findElement(By.name("estabelecimento.endereco")).sendKeys(endereco);
-		form.submit();
 	}
 
+	public void adicionar(){
+		form.submit();
+		form = null;
+	}
+	
 	public void ultimaLinhaDeveConter(String nome, String endereco) {
 		WebElement ultimaLinha = ultimaLinha();
 		assertThat(ultimaLinha.findElements(By.tagName("td")).get(1).getText(), is(nome));

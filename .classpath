@@ -31,6 +31,7 @@
 	<classpathentry kind="lib" path="/home/alexandre/work/caelum/pm-87/pm87-agiletickets-bdd/lib/acceptance-test/cucumber-java-1.2.2.jar"/>
 	<classpathentry kind="lib" path="/home/alexandre/work/caelum/pm-87/pm87-agiletickets-bdd/lib/acceptance-test/cucumber-junit-1.2.2.jar"/>
 	<classpathentry kind="lib" path="/home/alexandre/work/caelum/pm-87/pm87-agiletickets-bdd/lib/acceptance-test/cucumber-jvm-deps-1.0.3.jar"/>
+	<classpathentry kind="lib" path="/home/alexandre/work/caelum/pm-87/pm87-agiletickets-bdd/lib/acceptance-test/cucumber-picocontainer-1.2.2.jar"/>
 	<classpathentry kind="lib" path="/home/alexandre/work/caelum/pm-87/pm87-agiletickets-bdd/lib/acceptance-test/gherkin-2.12.2.jar"/>
 	<classpathentry kind="lib" path="/home/alexandre/work/caelum/pm-87/pm87-agiletickets-bdd/lib/acceptance-test/gson-2.3.jar"/>
 	<classpathentry kind="lib" path="/home/alexandre/work/caelum/pm-87/pm87-agiletickets-bdd/lib/acceptance-test/guava-18.0.jar"/>
@@ -50,6 +51,7 @@
 	<classpathentry kind="lib" path="/home/alexandre/work/caelum/pm-87/pm87-agiletickets-bdd/lib/acceptance-test/mockito-all-1.8.5.jar"/>
 	<classpathentry kind="lib" path="/home/alexandre/work/caelum/pm-87/pm87-agiletickets-bdd/lib/acceptance-test/nekohtml-1.9.21.jar"/>
 	<classpathentry kind="lib" path="/home/alexandre/work/caelum/pm-87/pm87-agiletickets-bdd/lib/acceptance-test/netty-3.5.2.Final.jar"/>
+	<classpathentry kind="lib" path="/home/alexandre/work/caelum/pm-87/pm87-agiletickets-bdd/lib/acceptance-test/picocontainer-2.15.jar"/>
 	<classpathentry kind="lib" path="/home/alexandre/work/caelum/pm-87/pm87-agiletickets-bdd/lib/acceptance-test/platform-3.4.0.jar"/>
 	<classpathentry kind="lib" path="/home/alexandre/work/caelum/pm-87/pm87-agiletickets-bdd/lib/acceptance-test/sac-1.3.jar"/>
 	<classpathentry kind="lib" path="/home/alexandre/work/caelum/pm-87/pm87-agiletickets-bdd/lib/acceptance-test/selenium-api-2.44.0.jar"/>

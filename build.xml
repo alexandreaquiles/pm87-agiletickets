@@ -169,15 +169,21 @@
 		</path>
 		<taskdef classpathref="jetty.path.id" resource="tasks.properties" loaderref="jetty.loader" />
 		<typedef name="webApp" classname="org.eclipse.jetty.ant.AntWebAppContext" classpathref="jetty.plugin.classpath" loaderref="jetty.loader" />
-		<jetty.run tempDirectory="${output.dir}/jetty-temp" jettyXml="src/main/java/webapp/WEB-INF/jetty-env.xml" daemon="true">
+		<jetty.run tempDirectory="${output.dir}/jetty-temp" jettyXml="src/main/java/webapp/WEB-INF/jetty-env.xml" daemon="${jetty.daemon}">
 			<webApp war="${webapp.dir}" contextpath="/" />
 		</jetty.run>
+	</target>
+
+	<target name="jetty-run-as-daemon">
+		<antcall target="jetty-run">
+			<param name="jetty.daemon" value="true"/>
+		</antcall>
 	</target>
 	
 	<!-- ================================= 
           target: runcukes              
          ================================= -->
-	<target name="runcukes" depends="compile-acceptance-test, preenche-banco, jetty-run" description="--> runs cucumber tests">
+	<target name="runcukes" depends="compile-acceptance-test, preenche-banco, jetty-run-as-daemon" description="--> runs cucumber tests">
 		<mkdir dir="${output.dir}/cucumber-junit-report"/>
 		<java classname="cucumber.api.cli.Main" fork="true" failonerror="false" resultproperty="cucumber.exitstatus">
 			<classpath refid="acceptance-test.path.id"/>

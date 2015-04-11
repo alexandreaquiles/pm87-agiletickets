@@ -1,7 +1,7 @@
 # language: pt
 
 Funcionalidade: Cadastro de Estacionamento
-  Para oferecer serviços de táxi da minha outra empresa perto de onde é incoveniente ir de carro
+  Para oferecer serviços de táxi da minha outra empresa perto de onde é inconveniente ir de carro
   Como dono também de uma frota de táxis
   Quero poder cadastrar se um estabelecimento tem estacinamento 
 

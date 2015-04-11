@@ -181,16 +181,16 @@
 	</target>
 	
 	<!-- ================================= 
-          target: runcukes              
+          target: acceptance-test              
          ================================= -->
-	<target name="runcukes" depends="compile-acceptance-test, preenche-banco, jetty-run-as-daemon" description="--> runs cucumber tests">
+	<target name="acceptance-test" depends="compile-acceptance-test, preenche-banco, jetty-run-as-daemon" description="--> runs cucumber tests">
 		<mkdir dir="${output.dir}/cucumber-junit-report"/>
 		<java classname="cucumber.api.cli.Main" fork="true" failonerror="false" resultproperty="cucumber.exitstatus">
 			<classpath refid="acceptance-test.path.id"/>
 			<arg value="--plugin"/>
 			<arg value="pretty"/>
 			<arg value="--plugin"/>
-			<arg value="junit:${output.dir}/cucumber-junit-report.xml"/>
+			<arg value="junit:${output.dir}/cucumber-junit-report/cucumber-junit-report.xml"/>
 			<arg value="--glue"/>
 			<arg value="br.com.caelum.agiletickets.acceptance"/>
 			<arg value="src/acceptance-test/resources"/>
